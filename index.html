@@ -193,6 +193,13 @@
         text-transform: uppercase;
       }
 
+            .label-note {
+        font-size: 0.7rem;
+        text-transform: none;
+        color: var(--primary);
+        font-weight: 600;
+      }
+      
       .input-group label {
         display: block;
         font-size: 0.85rem;
@@ -493,7 +500,7 @@
 
         <div class="form-row">
           <div class="input-group">
-            <label>GPA Hiện Tại</label>
+            <label>GPA Hiện Tại <span class="label-note">(Hệ 4)</span></label>
             <input
               type="number"
               id="currentGPA"
@@ -506,7 +513,7 @@
             />
           </div>
           <div class="input-group">
-            <label>Mục Tiêu</label>
+            <label>Mục Tiêu <span class="label-note">(Hệ 4)</span></label>
             <input
               type="number"
               id="targetGPA"
@@ -959,4 +966,5 @@
     </script>
   </body>
 </html>
+
 
