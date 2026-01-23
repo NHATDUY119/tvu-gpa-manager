@@ -96,7 +96,7 @@
         font-size: 0.9rem;
       }
 
-      /* --- DISCLAIMER BOX (FIXED MOBILE) --- */
+      /* --- DISCLAIMER BOX --- */
       .disclaimer-box {
         background: rgba(255, 237, 213, 0.8);
         border: 1px solid #fdba74;
@@ -104,7 +104,7 @@
         padding: 16px;
         border-radius: 16px;
         display: flex;
-        flex-direction: column; /* Mobile: Stack vertical first */
+        flex-direction: column;
         gap: 15px;
         margin-top: 10px;
       }
@@ -135,7 +135,7 @@
         font-size: 0.9rem;
         display: flex;
         align-items: center;
-        justify-content: center; /* Center text on mobile */
+        justify-content: center;
         gap: 8px;
         transition: 0.2s;
       }
@@ -193,13 +193,13 @@
         text-transform: uppercase;
       }
 
-            .label-note {
+      .label-note {
         font-size: 0.7rem;
         text-transform: none;
         color: var(--primary);
         font-weight: 600;
       }
-      
+
       .input-group label {
         display: block;
         font-size: 0.85rem;
@@ -210,7 +210,7 @@
 
       .input-glass {
         width: 100%;
-        padding: 14px 16px; /* Tăng vùng chạm */
+        padding: 14px 16px;
         border-radius: 12px;
         border: 2px solid rgba(255, 255, 255, 0.5);
         background: rgba(255, 255, 255, 0.9);
@@ -238,18 +238,44 @@
         margin-bottom: 15px;
       }
 
-      /* --- SIMULATOR FIX (MOBILE) --- */
+      /* --- TARGET CHIPS (NEW FEATURE) --- */
+      .target-chips {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+        color: var(--text-sec);
+      }
+      .chip:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        transform: translateY(-2px);
+      }
+      .chip span {
+        font-weight: 800;
+      }
+
+      /* --- SIMULATOR FIX --- */
       .sim-row {
         display: flex;
         gap: 10px;
         align-items: flex-end;
         margin-bottom: 10px;
-        flex-wrap: wrap; /* Cho phép rớt dòng */
+        flex-wrap: wrap;
       }
-
-      /* Mobile: Tên môn full dòng, 3 ô còn lại 1 dòng */
       .sim-col-name {
-        flex: 1 1 100%; /* Mặc định full width trên mobile */
+        flex: 1 1 100%;
       }
       .sim-col-small {
         flex: 1;
@@ -257,8 +283,6 @@
       .sim-col-btn {
         flex: 0 0 auto;
       }
-
-      /* PC: Chung 1 dòng */
       @media (min-width: 600px) {
         .sim-row {
           flex-wrap: nowrap;
@@ -283,7 +307,6 @@
         box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
       }
 
-      /* --- BUTTON MAIN --- */
       .btn-main {
         width: 100%;
         padding: 18px;
@@ -298,7 +321,7 @@
         margin-top: 20px;
       }
 
-      /* --- RESULT OVERLAY --- */
+      /* --- RESULT --- */
       .result-overlay {
         background: #fff;
         border: 2px solid var(--primary);
@@ -317,7 +340,6 @@
           transform: scale(1);
         }
       }
-
       .res-score {
         font-size: 3rem;
         font-weight: 800;
@@ -353,6 +375,11 @@
         padding: 12px 10px;
         border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
       }
+      .scale-header {
+        background: rgba(99, 102, 241, 0.1);
+        font-weight: 700;
+        color: var(--primary);
+      }
       .badge {
         padding: 4px 12px;
         border-radius: 20px;
@@ -374,6 +401,32 @@
       .badge-D {
         background: #fee2e2;
         color: #991b1b;
+      }
+      .badge-XS {
+        background: #fce7f3;
+        color: #9d174d;
+      } /* Xuất sắc */
+
+      /* Tabs for Lookup */
+      .tab-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      .tab-btn {
+        flex: 1;
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid var(--primary);
+        background: transparent;
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+      .tab-btn.active {
+        background: var(--primary);
+        color: white;
       }
 
       .footer {
@@ -482,7 +535,7 @@
               type="number"
               id="totalCredits"
               class="input-glass"
-              placeholder="VD: 150"
+              placeholder="..."
               onkeyup="syncData()"
             />
           </div>
@@ -524,6 +577,17 @@
               onkeyup="syncData()"
               oninput="validateInput(this, 4.0)"
             />
+            <div class="target-chips">
+              <div class="chip" onclick="setTarget(2.5)">
+                Khá <span>2.5</span>
+              </div>
+              <div class="chip" onclick="setTarget(3.2)">
+                Giỏi <span>3.2</span>
+              </div>
+              <div class="chip" onclick="setTarget(3.6)">
+                Xuất sắc <span>3.6</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -561,16 +625,6 @@
           <div class="section-label">
             <i class="fa-solid fa-flask"></i> Giả Lập Điểm Số
           </div>
-        <p
-          style="
-            font-size: 0.85rem;
-            color: var(--text-sec);
-            margin-bottom: 20px;
-          "
-        >
-          Nhập thử điểm các môn sắp tới (Đồ án, Thực tập...) để xem GPA thay đổi
-          thế nào.
-        </p>
           <div
             id="simWarning"
             style="
@@ -666,63 +720,121 @@
 
         <div class="glass-card">
           <div class="section-label">
-            <i class="fa-solid fa-table-list"></i> Quy đổi nhanh
+            <i class="fa-solid fa-table-list"></i> Tra cứu
           </div>
-          <div style="display: flex; gap: 10px; margin-bottom: 15px">
-            <input
-              type="number"
-              id="quickIn"
-              class="input-glass"
-              placeholder="Nhập điểm hệ 10..."
-              oninput="quickConvert()"
-            />
-            <div
-              id="quickOut"
-              style="
-                display: flex;
-                align-items: center;
-                font-weight: 800;
-                color: var(--primary);
-                min-width: 80px;
-                justify-content: flex-end;
-              "
-            >
-              ...
+
+          <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('grade')">
+              Điểm Số
+            </button>
+            <button class="tab-btn" onclick="switchTab('rank')">
+              Xếp Loại TN
+            </button>
+          </div>
+
+          <div id="tab-grade">
+            <div style="display: flex; gap: 10px; margin-bottom: 15px">
+              <input
+                type="number"
+                id="quickIn"
+                class="input-glass"
+                placeholder="Nhập điểm hệ 10..."
+                oninput="quickConvert()"
+              />
+              <div
+                id="quickOut"
+                style="
+                  display: flex;
+                  align-items: center;
+                  font-weight: 800;
+                  color: var(--primary);
+                  min-width: 80px;
+                  justify-content: flex-end;
+                "
+              >
+                ...
+              </div>
+            </div>
+            <div style="height: 180px; overflow-y: auto">
+              <table class="scale-table">
+                <tr class="scale-header">
+                  <td>Điểm 10</td>
+                  <td>Chữ</td>
+                  <td>Điểm 4</td>
+                </tr>
+                <tr>
+                  <td>9.0 - 10</td>
+                  <td><span class="badge badge-A">A</span></td>
+                  <td>4.0</td>
+                </tr>
+                <tr>
+                  <td>8.0 - 8.9</td>
+                  <td><span class="badge badge-A">B+</span></td>
+                  <td>3.5</td>
+                </tr>
+                <tr>
+                  <td>7.0 - 7.9</td>
+                  <td><span class="badge badge-B">B</span></td>
+                  <td>3.0</td>
+                </tr>
+                <tr>
+                  <td>6.5 - 6.9</td>
+                  <td><span class="badge badge-B">C+</span></td>
+                  <td>2.5</td>
+                </tr>
+                <tr>
+                  <td>5.5 - 6.4</td>
+                  <td><span class="badge badge-C">C</span></td>
+                  <td>2.0</td>
+                </tr>
+                <tr>
+                  <td>4.0 - 4.9</td>
+                  <td><span class="badge badge-D">D</span></td>
+                  <td>1.0</td>
+                </tr>
+              </table>
             </div>
           </div>
-          <div style="height: 200px; overflow-y: auto">
-            <table class="scale-table">
-              <tr>
-                <td>9.0 - 10</td>
-                <td><span class="badge badge-A">A</span></td>
-                <td>4.0</td>
-              </tr>
-              <tr>
-                <td>8.0 - 8.9</td>
-                <td><span class="badge badge-A">B+</span></td>
-                <td>3.5</td>
-              </tr>
-              <tr>
-                <td>7.0 - 7.9</td>
-                <td><span class="badge badge-B">B</span></td>
-                <td>3.0</td>
-              </tr>
-              <tr>
-                <td>6.5 - 6.9</td>
-                <td><span class="badge badge-B">C+</span></td>
-                <td>2.5</td>
-              </tr>
-              <tr>
-                <td>5.5 - 6.4</td>
-                <td><span class="badge badge-C">C</span></td>
-                <td>2.0</td>
-              </tr>
-              <tr>
-                <td>4.0 - 4.9</td>
-                <td><span class="badge badge-D">D</span></td>
-                <td>1.0</td>
-              </tr>
-            </table>
+
+          <div id="tab-rank" style="display: none">
+            <div style="height: 230px; overflow-y: auto">
+              <table class="scale-table">
+                <tr class="scale-header">
+                  <td>Xếp Loại</td>
+                  <td>GPA (Hệ 4)</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-XS">Xuất Sắc</span></td>
+                  <td><b>3.60 - 4.00</b></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-A">Giỏi</span></td>
+                  <td><b>3.20 - 3.59</b></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-B">Khá</span></td>
+                  <td><b>2.50 - 3.19</b></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-C">Trung Bình</span></td>
+                  <td><b>2.00 - 2.49</b></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-D">Yếu</span></td>
+                  <td><b>< 2.00</b></td>
+                </tr>
+              </table>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-sec);
+                  margin-top: 10px;
+                  font-style: italic;
+                "
+              >
+                * Điều kiện: Không bị kỷ luật từ mức cảnh cáo trở lên.
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -765,6 +877,31 @@
         const val = parseFloat(input.value);
         if (val < 0 || val > maxVal) input.classList.add("input-error");
         else input.classList.remove("input-error");
+      }
+
+      // Hàm hỗ trợ nhập nhanh mục tiêu
+      function setTarget(val) {
+        document.getElementById("targetGPA").value = val;
+        syncData(); // Tự động lưu và cập nhật
+      }
+
+      // Hàm chuyển tab
+      function switchTab(tabName) {
+        const tabGrade = document.getElementById("tab-grade");
+        const tabRank = document.getElementById("tab-rank");
+        const btns = document.querySelectorAll(".tab-btn");
+
+        if (tabName === "grade") {
+          tabGrade.style.display = "block";
+          tabRank.style.display = "none";
+          btns[0].classList.add("active");
+          btns[1].classList.remove("active");
+        } else {
+          tabGrade.style.display = "none";
+          tabRank.style.display = "block";
+          btns[0].classList.remove("active");
+          btns[1].classList.add("active");
+        }
       }
 
       function updateGauge(gpa) {
@@ -848,7 +985,7 @@
         box.scrollIntoView({ behavior: "smooth" });
       }
 
-      // 5. SIMULATOR (UPDATED LOGIC)
+      // 5. SIMULATOR
       function addSim() {
         const done = parseFloat(
           document.getElementById("completedCredits").value,
@@ -873,7 +1010,6 @@
           return;
         }
 
-        // Sửa logic chặn: Chuyển thành Cảnh báo Confirm
         const currentSimCredits = sims.reduce((acc, s) => acc + s.cr, 0);
         if (!isNaN(total) && done + currentSimCredits + cr > total) {
           const confirmAdd = confirm(
@@ -966,5 +1102,3 @@
     </script>
   </body>
 </html>
-
-
