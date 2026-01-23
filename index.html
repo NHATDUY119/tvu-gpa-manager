@@ -2,8 +2,11 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TVU GPA Manager | Glassmorphism Pro Fixed</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>TVU GPA Manager | Mobile Fixed</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
@@ -14,27 +17,23 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <style>
       :root {
         --primary: #4f46e5;
         --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-bg: rgba(255, 255, 255, 0.75);
         --glass-border: rgba(255, 255, 255, 0.8);
         --bg-body: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
         --text-main: #1e293b;
         --text-sec: #64748b;
         --success: #10b981;
         --danger: #ef4444;
-        --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        --shadow-hover:
-          0 20px 25px -5px rgba(0, 0, 0, 0.1),
-          0 10px 10px -5px rgba(0, 0, 0, 0.04);
       }
 
       * {
         box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
       }
 
       body {
@@ -44,7 +43,7 @@
         background-size: cover;
         color: var(--text-main);
         margin: 0;
-        padding: 30px 15px;
+        padding: 20px 15px;
         min-height: 100vh;
         display: flex;
         justify-content: center;
@@ -55,7 +54,8 @@
         max-width: 1150px;
         display: grid;
         grid-template-columns: 1fr;
-        gap: 25px;
+        gap: 20px;
+        padding-bottom: 50px;
       }
 
       @media (min-width: 992px) {
@@ -67,101 +67,90 @@
         }
       }
 
-      /* --- GLASS CARD & HOVER EFFECT --- */
+      /* --- GLASS CARD --- */
       .glass-card {
         background: var(--glass-bg);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid var(--glass-border);
         border-radius: 24px;
-        padding: 30px;
+        padding: 24px;
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.2s;
         height: fit-content;
-      }
-
-      .glass-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-hover);
-        background: rgba(255, 255, 255, 0.75);
-        border-color: #fff;
       }
 
       /* --- HEADER --- */
       .header-title h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 800;
         background: var(--primary-gradient);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0;
-        letter-spacing: -0.5px;
       }
       .header-title p {
         margin: 5px 0 0;
         color: var(--text-sec);
         font-weight: 600;
+        font-size: 0.9rem;
       }
 
-      /* --- DISCLAIMER BOX --- */
+      /* --- DISCLAIMER BOX (FIXED MOBILE) --- */
       .disclaimer-box {
-        background: rgba(255, 237, 213, 0.6);
+        background: rgba(255, 237, 213, 0.8);
         border: 1px solid #fdba74;
         color: #9a3412;
-        padding: 16px 24px;
+        padding: 16px;
         border-radius: 16px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        margin-top: 20px;
-        backdrop-filter: blur(10px);
-        box-shadow: var(--shadow-sm);
-        flex-wrap: wrap;
+        flex-direction: column; /* Mobile: Stack vertical first */
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      @media (min-width: 768px) {
+        .disclaimer-box {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
       }
 
       .disclaimer-content {
         display: flex;
-        gap: 15px;
+        gap: 10px;
         align-items: start;
-        flex: 1;
-      }
-      .disclaimer-content i {
-        font-size: 1.2rem;
-        margin-top: 3px;
-        color: #c2410c;
+        font-size: 0.9rem;
+        line-height: 1.4;
       }
 
       .btn-download-dark {
         background: #1f2937;
         color: white;
         text-decoration: none;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border-radius: 12px;
         font-weight: 700;
         font-size: 0.9rem;
-        display: inline-flex;
+        display: flex;
         align-items: center;
+        justify-content: center; /* Center text on mobile */
         gap: 8px;
         transition: 0.2s;
-        white-space: nowrap;
-      }
-      .btn-download-dark:hover {
-        background: #000;
-        transform: scale(1.05);
       }
 
-      /* --- GAUGE FIXED (FULL CIRCLE) --- */
+      /* --- GAUGE --- */
       .gauge-container {
         position: relative;
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
         margin: 0 auto 20px;
       }
       .gauge-svg {
         width: 100%;
         height: 100%;
-        transform: rotate(-90deg); /* Bắt đầu từ đỉnh 12h */
+        transform: rotate(-90deg);
       }
       .gauge-bg {
         fill: none;
@@ -173,7 +162,7 @@
         stroke: url(#grad1);
         stroke-width: 15;
         stroke-linecap: round;
-        stroke-dasharray: 565; /* Chu vi 2*PI*90 */
+        stroke-dasharray: 565;
         stroke-dashoffset: 565;
         transition: stroke-dashoffset 1s ease-out;
       }
@@ -186,54 +175,38 @@
         width: 100%;
       }
       .gauge-val {
-        font-size: 3rem;
+        font-size: 2.8rem;
         font-weight: 800;
-        color: #4f46e5;
+        color: var(--primary);
         line-height: 1;
-      }
-      .gauge-label {
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: var(--text-sec);
-        text-transform: uppercase;
-        margin-top: 5px;
       }
 
       /* --- INPUTS --- */
       .section-label {
-        font-size: 0.95rem;
-        font-weight: 700;
+        font-size: 1rem;
+        font-weight: 800;
         color: var(--primary);
         margin-bottom: 20px;
         display: flex;
         align-items: center;
         gap: 8px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
       }
 
-      .input-group {
-        margin-bottom: 15px;
-      }
       .input-group label {
         display: block;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         font-weight: 700;
         color: var(--text-sec);
-        margin-bottom: 6px;
-      }
-      .label-note {
-        font-size: 0.7rem;
-        color: var(--primary);
-        font-weight: 600;
+        margin-bottom: 8px;
       }
 
       .input-glass {
         width: 100%;
-        padding: 12px 16px;
+        padding: 14px 16px; /* Tăng vùng chạm */
         border-radius: 12px;
         border: 2px solid rgba(255, 255, 255, 0.5);
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.9);
         font-size: 1rem;
         font-weight: 600;
         color: var(--text-main);
@@ -255,83 +228,82 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px;
+        margin-bottom: 15px;
       }
 
-      /* --- SIMULATOR --- */
+      /* --- SIMULATOR FIX (MOBILE) --- */
       .sim-row {
         display: flex;
         gap: 10px;
         align-items: flex-end;
         margin-bottom: 10px;
+        flex-wrap: wrap; /* Cho phép rớt dòng */
       }
-      .sim-col {
+
+      /* Mobile: Tên môn full dòng, 3 ô còn lại 1 dòng */
+      .sim-col-name {
+        flex: 1 1 100%; /* Mặc định full width trên mobile */
+      }
+      .sim-col-small {
         flex: 1;
       }
-      .sim-col-lg {
-        flex: 2;
+      .sim-col-btn {
+        flex: 0 0 auto;
       }
-      .helper-text {
-        font-size: 0.7rem;
-        color: var(--text-sec);
-        text-align: center;
-        margin-top: 4px;
-        display: block;
+
+      /* PC: Chung 1 dòng */
+      @media (min-width: 600px) {
+        .sim-row {
+          flex-wrap: nowrap;
+        }
+        .sim-col-name {
+          flex: 2;
+        }
       }
 
       .btn-add {
-        height: 48px;
-        width: 48px;
+        height: 50px;
+        width: 50px;
         border-radius: 14px;
         border: none;
         background: var(--primary-gradient);
         color: white;
         font-size: 1.2rem;
-        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
         box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
-        transition: 0.2s;
-      }
-      .btn-add:hover {
-        transform: scale(1.1) rotate(90deg);
       }
 
       /* --- BUTTON MAIN --- */
       .btn-main {
         width: 100%;
-        padding: 16px;
+        padding: 18px;
         border: none;
         border-radius: 14px;
         background: var(--primary-gradient);
         color: white;
-        font-weight: 700;
+        font-weight: 800;
         font-size: 1.1rem;
         cursor: pointer;
         box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
-        transition: 0.3s;
         margin-top: 20px;
-        position: relative;
-        overflow: hidden;
-      }
-      .btn-main:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.5);
       }
 
-      /* --- RESULT & WARNING --- */
+      /* --- RESULT OVERLAY --- */
       .result-overlay {
-        background: rgba(255, 255, 255, 0.95);
+        background: #fff;
         border: 2px solid var(--primary);
-        color: var(--text-main);
         text-align: center;
         display: none;
         animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        margin-top: 20px;
       }
       @keyframes popUp {
         from {
           opacity: 0;
-          transform: scale(0.8);
+          transform: scale(0.9);
         }
         to {
           opacity: 1;
@@ -340,42 +312,12 @@
       }
 
       .res-score {
-        font-size: 3.5rem;
+        font-size: 3rem;
         font-weight: 800;
         background: var(--primary-gradient);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 10px 0;
-      }
-
-      .warning-box {
-        background: #fff1f2;
-        border-left: 4px solid #f43f5e;
-        color: #9f1239;
-        padding: 12px;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-bottom: 20px;
-        display: none;
-        animation: shake 0.5s;
-      }
-      @keyframes shake {
-        0% {
-          transform: translateX(0);
-        }
-        25% {
-          transform: translateX(-5px);
-        }
-        50% {
-          transform: translateX(5px);
-        }
-        75% {
-          transform: translateX(-5px);
-        }
-        100% {
-          transform: translateX(0);
-        }
       }
 
       /* --- TABLE & LIST --- */
@@ -385,8 +327,8 @@
         overflow-y: auto;
       }
       .sim-item {
-        background: rgba(255, 255, 255, 0.5);
-        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 12px 15px;
         border-radius: 12px;
         margin-bottom: 8px;
         display: flex;
@@ -401,11 +343,11 @@
         border-collapse: collapse;
       }
       .scale-table td {
-        padding: 10px;
+        padding: 12px 10px;
         border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
       }
       .badge {
-        padding: 4px 10px;
+        padding: 4px 12px;
         border-radius: 20px;
         font-weight: 700;
         font-size: 0.8rem;
@@ -427,41 +369,42 @@
         color: #991b1b;
       }
 
-      /* --- FOOTER --- */
       .footer {
         grid-column: 1 / -1;
         text-align: center;
-        margin-top: 40px;
-        color: var(--text-main);
+        margin-top: 20px;
+        color: var(--text-sec);
         font-size: 0.85rem;
-        opacity: 0.8;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="col-full header-title">
-        <h1>GPA MANAGER</h1>
-        <p>Dành cho SV khóa 23 trường KT&CN - TVU</p>
-      </div>
-
-      <div class="col-full disclaimer-box">
-        <div class="disclaimer-content">
-          <i class="fa-solid fa-circle-info"></i>
-          <div>
-            <strong>Lưu ý quan trọng:</strong> Mọi dữ liệu tín chỉ và quy chế
-            tính điểm được tham chiếu từ <b>Sổ tay Sinh viên Khóa 2023</b>.
-            <br />Kết quả chỉ mang tính chất tham khảo. Sinh viên cần đối chiếu
-            với cổng thông tin chính thức.
-          </div>
+      <div class="col-full">
+        <div class="header-title">
+          <h1>GPA MANAGER</h1>
+          <p>Dành cho SV khóa 23 trường KT&CN - TVU</p>
         </div>
-        <a
-          href="./SO_TAY_SINH_VIEN_KHOA_2023.pdf"
-          target="_blank"
-          class="btn-download-dark"
-        >
-          <i class="fa-solid fa-file-pdf"></i> Tải Sổ Tay K23
-        </a>
+
+        <div class="disclaimer-box">
+          <div class="disclaimer-content">
+            <i
+              class="fa-solid fa-circle-info"
+              style="margin-top: 3px; color: #c2410c"
+            ></i>
+            <div>
+              <strong>Lưu ý:</strong> Dữ liệu tham chiếu từ
+              <b>Sổ tay SV K23</b>. Kết quả chỉ mang tính tham khảo.
+            </div>
+          </div>
+          <a
+            href="./SO_TAY_SINH_VIEN_KHOA_2023.pdf"
+            target="_blank"
+            class="btn-download-dark"
+          >
+            <i class="fa-solid fa-file-pdf"></i> Tải Sổ Tay
+          </a>
+        </div>
       </div>
 
       <div class="glass-card">
@@ -490,7 +433,16 @@
           </svg>
           <div class="gauge-text-box">
             <div class="gauge-val" id="gaugeVal">0.00</div>
-            <div class="gauge-label">GPA HIỆN TẠI</div>
+            <div
+              style="
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: #64748b;
+                margin-top: 5px;
+              "
+            >
+              GPA HIỆN TẠI
+            </div>
           </div>
         </div>
 
@@ -505,7 +457,7 @@
             id="majorSelect"
             onchange="updateCredits()"
           >
-            <option value="">-- Chọn ngành (Tự động điền TC) --</option>
+            <option value="">-- Chọn ngành --</option>
             <option value="cntt">CN Thông tin (150 TC)</option>
             <option value="xaydung">Công trình Xây dựng (158 TC)</option>
             <option value="giaothong">Xây dựng CT Giao thông (158 TC)</option>
@@ -518,7 +470,7 @@
 
         <div class="form-row">
           <div class="input-group">
-            <label>Tổng Tín Chỉ</label>
+            <label>Tổng TC</label>
             <input
               type="number"
               id="totalCredits"
@@ -541,9 +493,7 @@
 
         <div class="form-row">
           <div class="input-group">
-            <label
-              >GPA Hiện Tại <span class="label-note">(Thang 4)</span></label
-            >
+            <label>GPA Hiện Tại</label>
             <input
               type="number"
               id="currentGPA"
@@ -556,7 +506,7 @@
             />
           </div>
           <div class="input-group">
-            <label>Mục Tiêu <span class="label-note">(Thang 4)</span></label>
+            <label>Mục Tiêu</label>
             <input
               type="number"
               id="targetGPA"
@@ -571,20 +521,16 @@
         </div>
 
         <button class="btn-main" onclick="calculateForecast()">
-          <i class="fa-solid fa-rocket"></i> PHÂN TÍCH LỘ TRÌNH
+          <i class="fa-solid fa-rocket"></i> PHÂN TÍCH NGAY
         </button>
 
-        <div
-          id="resultCard"
-          class="glass-card result-overlay"
-          style="margin-top: 20px"
-        >
+        <div id="resultCard" class="glass-card result-overlay">
           <div style="font-size: 0.9rem; color: var(--text-sec)">
             Để đạt mục tiêu <b id="resTarget">...</b>
           </div>
-          <div style="margin-top: 5px">Các môn cuối cần:</div>
+          <div style="margin-top: 5px">Các môn cuối cần trung bình:</div>
           <div class="res-score" id="resScore">...</div>
-          <div id="resMsg" style="font-weight: 700; margin-bottom: 10px"></div>
+          <div id="resMsg" style="font-weight: 700; margin-bottom: 15px"></div>
           <button
             onclick="
               document.getElementById('resultCard').style.display = 'none'
@@ -595,35 +541,47 @@
               text-decoration: underline;
               cursor: pointer;
               color: var(--text-sec);
+              padding: 10px;
             "
           >
-            Đóng
+            Đóng kết quả
           </button>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 25px">
+      <div style="display: flex; flex-direction: column; gap: 20px">
         <div class="glass-card">
           <div class="section-label">
             <i class="fa-solid fa-flask"></i> Giả Lập Điểm Số
           </div>
 
-          <div id="simWarning" class="warning-box">
+          <div
+            id="simWarning"
+            style="
+              background: #fff1f2;
+              color: #be123c;
+              padding: 10px;
+              border-radius: 8px;
+              font-size: 0.85rem;
+              margin-bottom: 15px;
+              display: none;
+              border-left: 3px solid #be123c;
+            "
+          >
             <i class="fa-solid fa-triangle-exclamation"></i> Vui lòng nhập
-            <b>TC đã học</b> và <b>GPA hiện tại</b> bên trái trước!
+            <b>TC đã học</b> & <b>GPA</b> bên trái trước!
           </div>
 
           <div class="sim-row">
-            <div class="sim-col-lg">
+            <div class="sim-col-name">
               <input
                 type="text"
                 id="simName"
                 class="input-glass"
-                placeholder="Tên môn"
+                placeholder="Tên môn học (VD: Java)"
               />
-              <span class="helper-text">&nbsp;</span>
             </div>
-            <div class="sim-col">
+            <div class="sim-col-small">
               <input
                 type="number"
                 id="simCr"
@@ -631,9 +589,8 @@
                 placeholder="TC"
                 style="text-align: center"
               />
-              <span class="helper-text">&nbsp;</span>
             </div>
-            <div class="sim-col">
+            <div class="sim-col-small">
               <input
                 type="number"
                 id="simSc"
@@ -642,14 +599,23 @@
                 style="text-align: center"
                 oninput="validateInput(this, 10)"
               />
-              <span class="helper-text">(Thang 10)</span>
             </div>
-            <div>
+            <div class="sim-col-btn">
               <button class="btn-add" onclick="addSim()">
                 <i class="fa-solid fa-plus"></i>
               </button>
-              <span class="helper-text">&nbsp;</span>
             </div>
+          </div>
+          <div
+            style="
+              text-align: right;
+              font-size: 0.75rem;
+              color: var(--text-sec);
+              margin-top: -5px;
+              margin-bottom: 10px;
+            "
+          >
+            * Điểm nhập hệ 10
           </div>
 
           <div id="simList" class="sim-list"></div>
@@ -672,12 +638,10 @@
                 align-items: center;
               "
             >
-              <span style="font-weight: 700; color: #047857"
-                >GPA Dự Kiến (Sync):</span
-              >
+              <span style="font-weight: 700; color: #047857">GPA Dự Kiến:</span>
               <span
                 id="newGPA"
-                style="font-size: 1.3rem; font-weight: 800; color: #059669"
+                style="font-size: 1.5rem; font-weight: 800; color: #059669"
                 >0.00</span
               >
             </div>
@@ -686,7 +650,7 @@
 
         <div class="glass-card">
           <div class="section-label">
-            <i class="fa-solid fa-table-list"></i> Quy đổi nhanh
+            <i class="fa-solid fa-table-list"></i> Tra cứu nhanh
           </div>
           <div style="display: flex; gap: 10px; margin-bottom: 15px">
             <input
@@ -704,12 +668,13 @@
                 font-weight: 800;
                 color: var(--primary);
                 min-width: 80px;
+                justify-content: flex-end;
               "
             >
               ...
             </div>
           </div>
-          <div style="height: 150px; overflow-y: auto">
+          <div style="height: 200px; overflow-y: auto">
             <table class="scale-table">
               <tr>
                 <td>9.0 - 10</td>
@@ -779,34 +744,25 @@
         syncData();
       };
 
-      // 3. HELPER: Validation
+      // 3. HELPER
       function validateInput(input, maxVal) {
         const val = parseFloat(input.value);
-        if (val < 0 || val > maxVal) {
-          input.classList.add("input-error");
-        } else {
-          input.classList.remove("input-error");
-        }
+        if (val < 0 || val > maxVal) input.classList.add("input-error");
+        else input.classList.remove("input-error");
       }
 
-      // 4. GAUGE LOGIC (FULL CIRCLE FIX)
       function updateGauge(gpa) {
         const path = document.getElementById("gaugePath");
         const radius = 90;
-        const circumference = 2 * Math.PI * radius; // ~565
-
-        // Clamp GPA 0-4
+        const circumference = 2 * Math.PI * radius;
         const val = Math.min(Math.max(gpa, 0), 4.0);
-
-        // Offset: 4.0 -> 0 offset, 0 -> 565 offset
         const offset = circumference - (val / 4.0) * circumference;
-
         path.style.strokeDasharray = `${circumference} ${circumference}`;
         path.style.strokeDashoffset = offset;
         document.getElementById("gaugeVal").innerText = val.toFixed(2);
       }
 
-      // 5. CORE LOGIC & SYNC
+      // 4. CORE
       function updateCredits() {
         const mj = document.getElementById("majorSelect").value;
         if (majors[mj])
@@ -824,10 +780,9 @@
           sims: sims,
         };
         localStorage.setItem("tvu_gpa_v8", JSON.stringify(data));
-
         const cur = parseFloat(data.cur) || 0;
         updateGauge(cur);
-        renderSim(); // Auto re-calc sim when base data changes
+        renderSim();
       }
 
       function calculateForecast() {
@@ -841,24 +796,18 @@
         const sc = document.getElementById("resScore");
         const msg = document.getElementById("resMsg");
 
-        // Validate
         if (!tot || !done || isNaN(cur) || isNaN(tar)) {
-          alert("Vui lòng nhập đủ thông tin!");
-          return;
-        }
-        if (cur > 4.0 || tar > 4.0 || cur < 0 || tar < 0) {
-          alert("GPA phải từ 0 - 4.0");
+          alert("Vui lòng nhập đủ thông tin bên trên!");
           return;
         }
 
         const rem = tot - done;
         if (rem <= 0) {
-          alert("Đã hoàn thành chương trình!");
+          alert("Bạn đã hoàn thành đủ số tín chỉ!");
           return;
         }
 
         const need = (tar * tot - cur * done) / rem;
-
         box.style.display = "block";
         document.getElementById("resTarget").innerText = tar;
 
@@ -868,10 +817,9 @@
           msg.innerText = "Bất khả thi (> 4.0) 😰";
           msg.style.color = "#ef4444";
         } else if (need <= 0) {
-          // Xử lý lỗi hiển thị số âm (Logic mới)
           sc.innerText = "ĐẠT";
           sc.style.color = "#10b981";
-          msg.innerText = "Điểm hiện tại đã đủ để đạt mục tiêu! 🎉";
+          msg.innerText = "Điểm hiện tại đã đủ mục tiêu! 🎉";
           msg.style.color = "#10b981";
           confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
         } else {
@@ -881,13 +829,11 @@
           msg.style.color = "#6366f1";
           confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
         }
-
         box.scrollIntoView({ behavior: "smooth" });
       }
 
-      // 6. SIMULATOR (SMART SYNC + WARNING + TOTAL CHECK)
+      // 5. SIMULATOR (UPDATED LOGIC)
       function addSim() {
-        // 1. Check base data
         const done = parseFloat(
           document.getElementById("completedCredits").value,
         );
@@ -896,34 +842,30 @@
 
         if (isNaN(done) || isNaN(cur)) {
           document.getElementById("simWarning").style.display = "block";
-          return; // Stop if no base data
+          return;
         } else {
           document.getElementById("simWarning").style.display = "none";
         }
 
-        // 2. Get Input & Validate
         const name = document.getElementById("simName").value || "Môn học";
         const cr = parseFloat(document.getElementById("simCr").value);
         const sc10 = parseFloat(document.getElementById("simSc").value);
 
         if (!cr || isNaN(sc10)) return;
         if (sc10 < 0 || sc10 > 10) {
-          alert("Điểm môn học phải từ 0 - 10");
+          alert("Điểm phải từ 0 - 10");
           return;
         }
 
-        // 3. Check Total Credits Constraint (Ràng buộc mới)
-        // Tính tổng tín chỉ giả lập hiện có
+        // Sửa logic chặn: Chuyển thành Cảnh báo Confirm
         const currentSimCredits = sims.reduce((acc, s) => acc + s.cr, 0);
-
         if (!isNaN(total) && done + currentSimCredits + cr > total) {
-          alert(
-            `Cảnh báo: Tổng tín chỉ tích lũy (${done}) + Giả lập (${currentSimCredits + cr}) vượt quá tổng tín chỉ toàn khóa (${total})!`,
+          const confirmAdd = confirm(
+            `Cảnh báo: Tổng tín chỉ tích lũy (${done + currentSimCredits + cr}) sẽ vượt quá tổng số TC quy định (${total}). Bạn có chắc chắn muốn thêm (Học cải thiện/Học vượt)?`,
           );
-          return;
+          if (!confirmAdd) return;
         }
 
-        // 4. Convert (TVU Standard)
         let sc4 = 0;
         if (sc10 >= 9) sc4 = 4.0;
         else if (sc10 >= 8) sc4 = 3.5;
@@ -955,7 +897,6 @@
           document.getElementById("completedCredits").value,
         );
 
-        // Hide result if base data missing (Sync Logic)
         if (isNaN(cur) || isNaN(done)) {
           resBox.style.display = "none";
           return;
@@ -967,25 +908,22 @@
           addCr += s.cr;
           addPt += s.sc4 * s.cr;
           list.innerHTML += `
-                <div class="sim-item">
-                    <div><b>${s.name}</b> <span style="font-size:0.8rem; color:#64748b">(${s.cr}TC • ${s.sc10}đ)</span></div>
-                    <div style="display:flex; gap:10px; align-items:center">
-                        <span style="font-weight:700; color:#4f46e5">${s.sc4}</span>
-                        <i class="fa-solid fa-xmark" style="cursor:pointer; color:#ef4444" onclick="removeSim(${i})"></i>
-                    </div>
-                </div>`;
+            <div class="sim-item">
+              <div style="flex:1; padding-right:10px"><b>${s.name}</b> <br><span style="font-size:0.8rem; color:#64748b">${s.cr}TC • ${s.sc10}đ</span></div>
+              <div style="display:flex; gap:10px; align-items:center">
+                <span style="font-weight:700; color:#4f46e5; font-size:1.1rem">${s.sc4}</span>
+                <i class="fa-solid fa-trash-can" style="cursor:pointer; color:#ef4444; opacity:0.7" onclick="removeSim(${i})"></i>
+              </div>
+            </div>`;
         });
 
         if (done + addCr > 0) {
           const newG = (cur * done + addPt) / (done + addCr);
           const el = document.getElementById("newGPA");
           el.innerText = newG.toFixed(2);
-
-          // Color feedback
           if (newG > cur) el.style.color = "#10b981";
           else if (newG < cur) el.style.color = "#ef4444";
           else el.style.color = "#4f46e5";
-
           resBox.style.display = "block";
         } else {
           resBox.style.display = "none";
@@ -1012,4 +950,3 @@
     </script>
   </body>
 </html>
-
